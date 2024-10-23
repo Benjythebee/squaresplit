@@ -1,7 +1,7 @@
 # squaresplit
 
 A tiny JavaScript library for splitting a single square container into multiple squares.
-which is useful for generating CSS sprites and WebGL textures. Similar to [shelf-pack](https://github.com/mapbox/shelf-pack).
+which is useful for generating CSS sprites and WebGL textures. 
 This library was inspired by [mapbox/potpack](https://mapbox.github.io/potpack/)
 
 ## [Demo](https://benjythebee.github.io/squaresplit/)
