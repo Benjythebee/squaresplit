@@ -1,50 +1,31 @@
-# potpack
+# squaresplit
 
-A tiny JavaScript library for splitting a single square-ish container into multiple squares.
+A tiny JavaScript library for splitting a single square container into multiple squares.
 which is useful for generating CSS sprites and WebGL textures. Similar to [shelf-pack](https://github.com/mapbox/shelf-pack).
-This library 
+This library was inspired by [mapbox/potpack](https://mapbox.github.io/potpack/)
 
-A variation of algorithms used in
-[rectpack2D](https://github.com/TeamHypersomnia/rectpack2D) and
-[bin-pack](https://github.com/bryanburgers/bin-pack),
-which are in turn based on
-[this article by Blackpawn](http://blackpawn.com/texts/lightmaps/default.html).
-
-## [Demo](https://mapbox.github.io/potpack/)
+## [Demo](https://benjythebee.github.io/squaresplit/)
 
 ## Example usage
 
 ```js
-import potpack from 'potpack';
+import squaresplit from 'squaresplit';
 
-const boxes = [
-    {w: 300, h: 50},
-    {w: 100, h: 200},
-    ...
-];
+const numberOfSquares = 50
+const size = 1024 // optional
 
-const {w, h, fill} = potpack(boxes);
-// w and h are resulting container's width and height;
+const {squares fill} = potpack(numberOfSquares,size);
+// squares is resulting squares with format {w: number, h: number,  x: number, y: number}
 // fill is the space utilization value (0 to 1), higher is better
 
-// potpack mutates the boxes array: it's sorted by height,
-// and box objects are augmented with x, y coordinates:
-boxes[0]; // {w: 300, h: 50,  x: 100, y: 0}
-boxes[1]; // {w: 100, h: 200, x: 0,   y: 0}
+//squares are ordered from biggest width to least
+squares[0]; // {w: 300, h: 300,  x: 0, y: 0}
+squares[1]; // {w: 100, h: 100, x: 100,   y: 0}
 ```
 
 ## Install
 
-Install with NPM: `npm install potpack`.
-
-Potpack is provided as a ES module, so it's only supported on modern browsers, excluding IE:
-
-```html
-<script type="module">
-import potpack from 'https://cdn.skypack.dev/potpack';
-...
-</script>
-```
+Install with NPM: `npm install squaresplit`.
 
 In Node, you can't use `require` — only `import` in ESM-capable versions (v12.15+):
 
