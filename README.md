@@ -30,5 +30,5 @@ Install with NPM: `npm install squaresplit`.
 In Node, you can't use `require` — only `import` in ESM-capable versions (v12.15+):
 
 ```js
-import potpack from 'potpack';
+import squaresplit from 'squaresplit';
 ```
