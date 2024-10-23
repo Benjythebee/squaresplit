@@ -49,9 +49,9 @@ export default function squaresplit(numBoxes, size = 10) {
     while (squares.length > numBoxes) {
         squares.pop();
     }
-    console.log(squares)
+
     const fill = squares.reduce((acc, square) => acc + square.w * square.h, 0) / (size * size);
-    console.log(fill)
+
     return {
         squares,
         fill
