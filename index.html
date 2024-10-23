@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+    body { margin: 0; font: 16px/1.2 "Helvetica Neue", Helvetica, Arial, sans-serif; display: flex; flex-direction: column; align-items: center; }
+    h1 { font-size: 32px; font-weight: normal; }
+    p { margin: 0 0 10px; }
+    #info { color: #999; }
+    #info em { font-style: normal; color: #555; }
+    #container { max-width: 580px; }
+    #canvas { border: 1px solid #ccc; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+<div id="container">
+    <h1>squaresplit demo</h1>
+    <p>Square split is a simple algorithm that will split a large square into smaller squares. It is useful for texture atlases if you don't care about the size of the texture.
+    which is useful for generating CSS sprites and WebGL textures. <strong>GitHub</strong>: <a href="https://github.com/Benjythebee/squaresplit">Benjythebee/squaresplit</a></p>.
+    Inspired by <a href="https://mapbox.github.io/potpack/" target="_blank">Mapbox/potpack</a>
+    <p><span id="info"></span> <button id="regenerate">Regenerate</button></p>
+    <canvas id="canvas"></canvas>
+</div>
+
+<script type="module">
+    import squaresplit from './index.js';
+
+    document.getElementById('regenerate').onclick = ()=>update(input.value,dimensionsW.value);
+
+    const input = document.getElementById('valuesInput');
+    const dimensionsW = document.getElementById('dimensionsW');
+
+    const renderValue = (value) => {
+        if(!value) {
+            value = 1
+        }
+        update(value,dimensionsW.value);
+    };
+    update(input.value,dimensionsW.value);
+    input.addEventListener('change', () => {
+            renderValue(input.value,dimensionsW.value);
+    }, true);
+    dimensionsW.addEventListener('change', () => {
+            renderValue(input.value,dimensionsW.value);
+    }, true);
+
+    function update(boxes,size=100) {
+        if(!boxes){
+            boxes = Math.ceil(Math.random()*100);
+        }
+        size = parseInt(size)
+        const h =size
+        const w = size;
+
+        const now = performance.now();
+        const {squares,fill} = squaresplit(boxes, parseInt(size));
+        const time = performance.now() - now;
+
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        const cw = 580;
+        const ch = cw * h / w;
+
+        canvas.width = cw * 2;
+        canvas.height = ch * 2;
+        canvas.style.width = cw + 'px';
+        canvas.style.height = ch + 'px';
+        ctx.scale(2, 2);
+
+        const r = cw / w;
+
+        ctx.lineWidth = 0.5;
+        for (const box of squares) {
+            ctx.beginPath();
+            ctx.fillStyle = `hsl(${Math.random() * 360}, 100%, 70%)`;
+            ctx.rect(box.x * r, box.y * r, box.w * r, box.h * r);
+            ctx.fill();
+            ctx.stroke();
+        }
+
+        document.getElementById('info').innerHTML = `Packed <em>${squares.length}</em> boxes in <em>${Math.round(100 * time) / 100}</em>ms. Utilization: <em>${(Math.round(10000 * fill) / 100)}%</em>. Size: <em>${w}x${h}</em>`;
+    }
+</script>
+<label>
+<input autofocus id="valuesInput" type="number" value="1" />
+Enter number of boxes</label>
+<div style="display: flex; flex-direction: column;">
+    <label>
+        Size of square</label>
+        <input id="dimensionsW" type="number" value="380" />
+    <label>
+</div>
+
+</body>
+</html>

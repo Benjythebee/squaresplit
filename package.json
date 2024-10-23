@@ -1,0 +1,41 @@
+{
+  "name": "squaresplit",
+  "version": "1.0.0",
+  "description": "A tiny library for spitting a square into smaller squares",
+  "main": "index.js",
+  "type": "module",
+  "exports": "./index.js",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "pretest": "eslint *.js",
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Benjythebee/squaresplit.git"
+  },
+  "keywords": [
+    "algorithms",
+    "sprites",
+    "bin packing",
+    "geometry",
+    "squares",
+    "split"
+  ],
+  "author": "Benjythebee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Benjythebee/squaresplit/issues"
+  },
+  "homepage": "https://mapbox.github.io/potpack/",
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "eslint": "^9.13.0",
+    "globals": "^15.11.0"
+  }
+}
