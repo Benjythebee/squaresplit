@@ -1,6 +1,6 @@
 {
   "name": "squaresplit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A tiny library for spitting a square into smaller squares",
   "main": "index.js",
   "type": "module",
